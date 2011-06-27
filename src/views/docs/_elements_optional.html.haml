@@ -1,0 +1,347 @@
+%section#optional_elements
+  %h2 Optional Elements
+  %p You are not required to include optional elements. However, to increase your exposure and rank higher in search results, we encourage that you provide all available information.
+  %table
+    %tr
+      %th Element
+      %th Type
+      %th Description
+
+    %tr
+      %td
+        :escaped
+          <mlsId/>
+      %td String
+      %td MLS Database ID #
+    %tr
+      %td
+        :escaped
+          <agent>
+      %td &nbsp;
+      %td &nbsp;
+    %tr
+      %td.indent
+        :escaped
+          <phone/>
+      %td String
+      %td
+        A valid telephone number. The type of number can be defined with the "type" attribute on the element.
+        %br
+        %em Type attribute: office, mobile, home
+    
+    %tr
+      %td
+        :escaped
+          <location>
+      %td &nbsp;
+      %td &nbsp;
+    %tr
+      %td.indent
+        :escaped
+          <buildingName/>
+      %td String
+      %td The building name of the property.
+    %tr
+      %td.indent
+        :escaped
+          <streetNumber/>
+      %td String
+      %td The street number of the property.
+    %tr
+      %td.indent
+        :escaped
+          <street/>
+      %td String
+      %td
+        The street address of the property
+    %tr
+      %td.indent
+        :escaped
+          <postcode/>
+      %td String
+      %td
+        The postal code of the properties area
+    %tr
+      %td.indent
+        :escaped
+          <latitude/>
+      %td Decimal
+      %td
+        The latitude of the property
+        %br
+        %em Min -90.0, Max 90.0
+    %tr
+      %td.indent
+        :escaped
+          <longitude/>
+      %td Decimal
+      %td
+        The longitude of the property
+        %br
+        %em Min -180.0, Max 180.0
+    %tr
+      %td
+        :escaped
+          <details>
+      %td &nbsp;
+      %td &nbsp;
+
+    %tr
+      %td.indent
+        :escaped
+          <website/>
+      %td String
+      %td The URL of the listing on your website.
+
+    %tr
+      %td.indent
+        :escaped
+          <price/>
+      %td Decimal
+      %td
+        %strong Residential Sales: 
+        The total price of the property in the specified currency.
+        %br
+        %strong Residential Rentals: 
+        The rental price of the property in the specified currency and period.
+        %br
+        %br
+        %em
+          %strong period: 
+          weekly, fortnightly, monthly
+          %br
+          %strong currency: 
+          Currency value should conform to the
+          #{link_to "ISO4217", "http://en.wikipedia.org/wiki/ISO_4217", :target => "_blank"} standard.
+    %tr
+      %td.indent
+        :escaped
+          <priceLabel/>
+      %td String
+      %td 
+        The price label is prepended to the price.
+        %br
+        %em priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable
+
+    %tr
+      %td.indent
+        :escaped
+          <priceDisplayMin/>
+      %td Decimal
+      %td The minimum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMax".
+    %tr
+      %td.indent
+        :escaped
+          <priceDisplayMax/>
+      %td Decimal
+      %td The maximum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMin".
+    
+    %tr
+      %td.indent
+        :escaped
+          <soldPrice/>
+      %td Decimal
+      %td If the status of the property is marked as sold, this tag will be used to record a sold price. This price is not displayed anywhere publicly.
+    %tr
+      %td.indent
+        :escaped
+          <soldDate/>
+      %td Date
+      %td The date on which the sale occurred.
+    %tr
+      %td.indent
+        :escaped
+          <bedrooms/>
+      %td String
+      %td 
+        The number of bedrooms this property has.
+        %br
+        %em Studio, 0, 1, 2, 3, 4, 5+
+    %tr
+      %td.indent
+        :escaped
+          <bathrooms/>
+      %td String
+      %td 
+        The number of bathrooms this property has.
+        %%br
+        %em 0, 1, 2, 3, 4, 5+
+    %tr
+      %td.indent
+        :escaped
+          <parking/>
+      %td String
+      %td 
+        The number of parking spaces this property has.
+        %em street, carport, 0, 1, 2, 3, 4, 5+
+    %tr
+      %td.indent
+        :escaped
+          <dateAvailable/>
+      %td Date
+      %td The date the property is available. For new developments this is the date the property is "ready for possession".
+
+    %tr
+      %td.indent
+        :escaped
+          <newlyBuilt/>
+      %td Boolean
+      %td Whether the property is new project or has been built recently.
+    %tr
+      %td.indent
+        :escaped
+          <projectName/>
+      %td String
+      %td The name of the Project
+    %tr
+      %td.indent
+        :escaped
+          <builder/>
+      %td String  
+      %td The name of the builder if the property is newly built.
+    %tr
+      %td.indent
+        :escaped
+          <yearBuilt/>
+      %td Integer
+      %td 
+        The year the property was built. 
+        %br
+        %em Format: YYYY
+    %tr
+      %td.indent
+        :escaped
+          <floorNumber/>
+      %td Integer
+      %td The floor number of the property if within a multi-story building.
+  
+    %tr
+      %td.indent
+        :escaped
+          <landArea/>
+      %td Integer
+      %td
+        The total land area of the property.
+        %br
+        The unit attribute allows the following values:
+        %br
+        %em feet, meters, acres, hectares
+    %tr
+      %td.indent
+        :escaped
+          <coveredArea/>
+      %td Integer
+      %td
+        The total covered area of the property.
+        %br
+        The unit attribute allows the following values:
+        %br
+        %em feet, meters
+    %tr
+      %td.indent
+        :escaped
+          <carpetedArea/>
+      %td Integer
+      %td
+        The total carpeted area of the property.
+        %br
+        The unit attribute allows the following values:
+        %br
+        %em feet, meters
+
+    %tr
+      %td.indent
+        :escaped
+          <builtupArea/>
+      %td Integer
+      %td
+        The total builtup area of the property.
+        %br
+        The unit attribute allows the following values:
+        %br
+        %em feet, meters
+      
+    %tr
+      %td
+        :escaped
+          <rentalTerms>
+      %td &nbsp;
+      %td &nbsp;
+  
+    %tr
+      %td.indent
+        :escaped
+          <deposit/>
+      %td Decimal
+      %td The rental deposit for the property
+  
+    %tr
+      %td.indent
+        :escaped
+          <minimumDuration/>
+      %td Decimal
+      %td
+        The minimum rental duration
+        %br
+        The period attribute defines the values period.
+        %em weeks, months, years
+  
+    %tr
+      %td
+        :escaped
+          <amenities>
+      %td Boolean
+      %td All amenities are boolean values.
+    %tr
+      %td.indent
+        :escaped
+          <other/>
+      %td String
+      %td A comma seperated list of additional amenities
+    %tr
+      %td
+        :escaped
+          <attachments>
+      %td &nbsp;
+      %td &nbsp;
+  
+    %tr
+      %td.indent
+        :escaped
+          <photo>
+        %br
+        :escaped
+          <floorplan>
+        %br
+        :escaped
+          <video>
+        %br
+        :escaped
+          <document>
+      %td &nbsp;
+      %td
+        %strong Acceptable Formats
+        %br
+        %em Photo/Floorplan: jpg, gif, png
+        %br
+        %em Video: mov, avi, mpg, flv, wmv
+        %br
+        %em Document: pdf
+    %tr
+      %td.indent2
+        :escaped
+          <url/>
+      %td String
+      %td The url for the attachment
+    %tr
+      %td.indent2
+        :escaped
+          <caption/>
+      %td String
+      %td The caption to be displayed with the attachment
+    %tr
+      %td.indent2
+        :escaped
+          <description/>
+      %td String
+      %td The description of the attachment. This helps optimize search engine keywords.

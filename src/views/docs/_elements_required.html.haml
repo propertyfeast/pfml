@@ -1,0 +1,145 @@
+%section#required_elements
+  %h2 Required Elements
+  %p Required fields have to be included in the feed as they contain the minimum amount of information necessary for our system to include your listings on PropertyFeast.
+  %table
+    %tr
+      %th Element
+      %th Type
+      %th Description
+    %tr
+      %td
+        :escaped
+          <propertyId/>
+      %td String
+      %td ID of the listing on your website. This ID must be unique to avoid duplication.
+    %tr
+      %td
+        :escaped
+          <officeId/>
+      %td String
+      %td The office identification number assigned to you by PropertyFeast.
+    %tr
+      %td
+        :escaped
+          <status/>
+      %td String
+      %td 
+        The status of the listing.
+        %br
+        %em active, rented, sold, under_contract, withdrawn
+    %tr
+      %td
+        :escaped
+          <updated/>
+      %td Datetime
+      %td The last updated date and time of the listing
+    %tr
+      %td
+        :escaped
+          <listingType/>
+      %td String
+      %td 
+        The listing category for this property
+        %br
+        %em residential_sale, residential_rental
+    %tr
+      %td 
+        :escaped
+          <agent>
+      %td &nbsp;
+      %td &nbsp;
+    %tr
+      %td.indent
+        :escaped
+          <name/>
+      %td String
+      %td The name of the listing agent
+    %tr
+      %td.indent
+        :escaped
+          <email/>
+      %td String
+      %td The email address of the listing agent
+    %tr
+      %td
+        :escaped
+          <location>
+      %td &nbsp;
+      %td &nbsp;
+    %tr
+      %td.indent
+        :escaped
+          <locality/>
+      %td String
+      %td Locality or neighborhood where the property is located
+    %tr
+      %td.indent
+        :escaped
+          <city/>
+      %td String
+      %td The city name where the property is located
+    %tr
+      %td.indent
+        :escaped
+          <region/>
+      %td String
+      %td The region or state name where the property is located
+    %tr
+      %td.indent
+        :escaped
+          <country/>
+      %td String
+      %td The country name where the property is located
+    %tr
+      %td
+        :escaped
+          <details>
+      %td &nbsp;
+      %td &nbsp;
+    %tr
+      %td.indent
+        :escaped
+          <headline/>
+      %td
+        String
+      %td
+        The headline for the property. This is displayed in the search results and as the heading of the property. 
+        %br
+        %em Min 10 Characters, Max 80 characters.
+    %tr
+      %td.indent
+        :escaped
+          <description/>
+      %td
+        String
+      %td 
+        The description of the property. Value must be enclosed in a CDATA section.
+        %br
+        %em Min 100 characters, Max 3000 characters.
+    %tr
+      %td.indent
+        :escaped
+          <propertyType/>
+      %td
+        String
+      %td
+        The property type.
+        %br
+        %em apartment, house, penthouse, bungalow, villa, row_house, farm_house, duplex, land
+    %tr
+      %td
+        :escaped
+          <photo>
+      %td &nbsp;
+      %td
+        All properties must have a least 1 photo and a maximum of 20 photos.
+        Photo resolution must be a minimum of 640x480 pixels. Photos that have lower resolutions than this will impact the quality score of this property.
+    %tr
+      %td.indent
+        :escaped
+          <url/>
+      %td String
+      %td
+        The url to the image.
+        %br
+        %em Acceptable formats: JPG, PNG, GIF

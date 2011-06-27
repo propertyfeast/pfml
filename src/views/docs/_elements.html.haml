@@ -1,0 +1,117 @@
+%section#elements
+  %h1 Elements
+  %p 
+    It is important that the XML feed is well formed and contains the required fields. You can use our #{link_to "XSD Schema", "#"} as an example of the feed structure. 
+
+  = partial('docs/elements_required')  
+  = partial('docs/elements_optional')
+  
+  %section#illegal_characters
+    %h2 Illegal Characters
+    %p When an XML element is parsed there can be an issue with any text that has illegal XML characters. There are two preferred methods to avoid breaking the XML parser.
+
+    %h4 Escaped Characters
+    %p Replace any illegal characters with the escaped characters shown below.
+    %table#illegal-characters
+      %tr
+        %th Illegal
+        %th Escaped
+        %th Description
+      %tr
+        %td &amp;
+        %td
+          :escaped
+            &amp;
+        %td Ampersand
+      %tr
+        %td &apos;
+        %td
+          :escaped
+            &apos;
+        %td Apostrophe
+      %tr
+        %td &gt;
+        %td
+          :escaped
+            &gt;
+        %td Greater Than
+      %tr
+        %td &lt;
+        %td
+          :escaped
+            &lt;
+        %td Less Than
+      %tr
+        %td &quot;
+        %td
+          :escaped
+            &quot;
+        %td Quotation Mark
+
+    %h4 CDATA Section
+    %p Enclose the tag value within a CDATA section. For example, the following is valid
+  
+    :coderay
+      #!xml
+      <description>
+        <![CDATA[This contains "illegal" characters like & but that's okay!]]>
+      </description>
+  
+  %section#case_sensitivity
+    %h2 Case Sensitivity
+    %p Elements are case sensitive and are camelcased. This also applies to attributes
+    :coderay
+      #!xml
+      <propertyType>apartment</propertyType>
+  
+  %section#date_format
+    %h2 Date &amp; Time Formats
+    
+    %h3 Datetime
+    %p A Datetime field is identified by the combination of a date and a time. Its value space is described as a "combination of date and time of day" in Chapter 5.4 of ISO 8601.
+
+    %p Its lexical space is the extended format:
+    :coderay
+      #!xml
+      [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]
+
+    %p Valid examples:
+    :coderay
+      #!xml
+      2001-10-26T21:32:52
+      2001-10-26T21:32:52+02:00
+      2001-10-26T19:32:52Z
+      2001-10-26T19:32:52+00:00
+      -2001-10-26T21:32:52
+      2001-10-26T21:32:52.12679
+      
+    %h3 Date
+    %p This datatype is modeled after the calendar dates defined in Chapter 5.2.1 of ISO (International Organization for Standardization) 8601. Its value space is the set of Gregorian calendar dates as defined by this standard; i.e., a one-day-long period of time. Its lexical space is the ISO 8601 extended format:
+    :coderay
+      #!xml
+      [-]CCYY-MM-DD[Z|(+|-)hh:mm]
+    
+    %p Valid examples:
+    :coderay
+      #!xml
+      2001-10-26
+      2001-10-26+02:00
+      2001-10-26Z
+      2001-10-26+00:00
+      -2001-10-26
+      -20000-04-01
+     
+  %section#attachments
+    %h2 Attachments
+    %p Photos, floorplans and videos are shown in the order they are listed. The first photo in the list is used as the thumbnail for the property in search results.
+  
+  %section#repeatable
+    %h2 Repeatable tags
+    %p Some tags in the specification have been marked as repeatable. This means if there are multiple tags of the same type, the details will be merged.
+
+    %em Example: You can list a group of properties with 2,3 and 4 bedrooms by repeating the tags with the values.
+    :coderay
+      #!xml
+      <bedrooms>2</bedrooms>
+      <bedrooms>3</bedrooms>
+      <bedrooms>4</bedrooms>

@@ -1,75 +1,774 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-
-  <title>propertyfeast/pfml @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #3007ee;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #cff811; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #cff811; }
-    h3 { text-align: center; color: #cff811; }
-    a { color: #cff811; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="http://github.com/propertyfeast/pfml"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/propertyfeast/pfml/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/propertyfeast/pfml/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <!-- Comment in layout -->
+    <link href="/pfml/stylesheets/site.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type='text/javascript'>
+      //<![CDATA[
+        // Comment in javascript
+      //]]>
+    </script>
+    <title>PropertyFeast</title>
+  </head>
+  <body class='index'>
+    <nav id='sidebar'>
+      <a class='logo' href='http://propertyfeast.com'>
+        <img src="/images/propertyfeast.png" />
+      </a>
+      <nav>
+        <a href='#'>
+          PFML
+          <span class='version'>(version 0.0.1)</span>
+        </a>
+        <a href='#overview'>Overview</a>
+        <a href='#example'>Feed Format</a>
+        <a href='#elements'>Elements</a>
+        <ul>
+          <li>
+            <a href='#required_elements'>&ndash;  Required Elements</a>
+          </li>
+          <li>
+            <a href='#optional_elements'>&ndash;  Optional Elements</a>
+          </li>
+          <li>
+            <a href='#illegal_characters'>&ndash; Illegal Characters</a>
+          </li>
+          <li>
+            <a href='#case_sensitivity'>&ndash; Case Sensitivity</a>
+          </li>
+          <li>
+            <a href='#date_format'>&ndash; Date &amp; Time Formats</a>
+          </li>
+          <li>
+            <a href='#attachments'>&ndash; Attachments</a>
+          </li>
+          <li>
+            <a href='#repeatable'>&ndash; Repeatable Tags</a>
+          </li>
+        </ul>
+        <a href='#validate'>Validation</a>
+        <a href='#delivery'>Delivery</a>
+        <a href='#contributing'>Contributing</a>
+      </nav>
+    </nav>
+    <div id='main' role='main'>
+      <article>
+        <section id='about'>
+          <h1>Property Feed Markup Language (PFML)</h1>
+          <p>
+            <strong>PFML is an XML markup language for transmitting real estate listings.</strong>
+            PFML is an abbreviation for “Property Feed Markup Language”. PFML is used by PropertyFeast partners to submit their listings to the PropertyFeast.com website.
+          </p>
+          <p>
+            <strong>Latest version:</strong>
+            <a href="#">0.0.1</a>
+            <strong>Last updated:</strong>
+            22/06/2011
+          </p>
+        </section>
+        <section id='overview'>
+          <h1>Overview</h1>
+          <p>To make things easy for you as an agent, we provide you with the option of sending us your property listings via an XML feed. Using the PFML xml format</p>
+          <p>PFML currently supports Residential Sales and Residential Rentals. Commercial properties will be added to the specification in the near future and will function similarly.</p>
+        </section>
+        <section id='example'>
+          <h1>XML Feed Format</h1>
+          <p>
+            <h5>
+              PFML Specification
+              (<a href="example.xml">example feed</a>)
+              (<a href="pfml.xsd">XSD schema</a>)
+            </h5>
+            <div class="CodeRay">
+              <div class="code"><pre><span class="pp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>&#x000A;&#x000A;<span class="ta">&lt;properties</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;&#x000A;  <span class="ta">&lt;property&gt;</span>&#x000A;    <span class="ta">&lt;propertyId</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;officeId</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;mlsId</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;status&gt;</span>(active|rented|sold|under_contract|withdrawn)<span class="ta">&lt;/status&gt;</span>&#x000A;    <span class="ta">&lt;updated</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;listingType&gt;</span>(residential_rental|residential_sale)<span class="ta">&lt;/listingType&gt;</span>&#x000A;    <span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;    <span class="ta">&lt;agent&gt;</span>&#x000A;      <span class="ta">&lt;name</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;phone</span> <span class="an">type</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(office|mobile|home)</span><span class="dl">&quot;</span></span> <span class="an">allowSMS</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(yes|no)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;email</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;photo</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;        <span class="ta">&lt;url</span><span class="ta">/&gt;</span>&#x000A;        <span class="ta">&lt;caption</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;/photo&gt;</span>&#x000A;    <span class="ta">&lt;/agent&gt;</span>&#x000A;    <span class="ta">&lt;location</span> <span class="an">display</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(yes|no)</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;      <span class="ta">&lt;buildingName</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;streetNumber</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;street</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;locality</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;city</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;region</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;country</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;postcode</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;longitude</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;latitude</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;/location&gt;</span>&#x000A;    <span class="ta">&lt;details&gt;</span>&#x000A;      <span class="ta">&lt;headline</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;description&gt;</span><span class="er">&lt;</span>![CDATA[ ]]<span class="er">&gt;</span><span class="ta">&lt;/description&gt;</span>&#x000A;      <span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;      <span class="ta">&lt;propertyType&gt;</span>&#x000A;        (apartment|house|penthouse|bungalow|villa|row_house|farm_house|duplex)&#x000A;      <span class="ta">&lt;/propertyType&gt;</span>&#x000A;      <span class="ta">&lt;website</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;price</span> <span class="an">period</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(weekly|fortnightly|monthly)</span><span class="dl">&quot;</span></span> <span class="an">currency</span>=<span class="s"><span class="dl">&quot;</span><span class="k">INR</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;priceLabel&gt;</span>(priced_at|priced_from|price_on_request)<span class="ta">&lt;/priceLabel&gt;</span>&#x000A;      <span class="ta">&lt;priceDisplayMin</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;priceDisplayMax</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;soldPrice</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;soldDate</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;bedrooms</span><span class="ta">/&gt;</span><span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;      <span class="ta">&lt;bathrooms</span><span class="ta">/&gt;</span><span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;      <span class="ta">&lt;parking</span><span class="ta">/&gt;</span><span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;      <span class="ta">&lt;dateAvailable</span><span class="ta">/&gt;</span><span class="c">&lt;!-- repeatable tag --&gt;</span>&#x000A;      <span class="ta">&lt;newlyBuilt&gt;</span>(yes|no)<span class="ta">&lt;/newlyBuilt&gt;</span>&#x000A;      <span class="ta">&lt;projectName</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;builder</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;yearBuilt</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;floorNumber</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;landArea</span> <span class="an">unit</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(feet|meters|acres|hectares)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;coveredArea</span> <span class="an">unit</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(feet|meters)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;carpetedArea</span> <span class="an">unit</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(feet|meters)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;builtupArea</span> <span class="an">unit</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(feet|meters)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;/details&gt;</span>&#x000A;    <span class="ta">&lt;rentalTerms&gt;</span>&#x000A;      <span class="ta">&lt;deposit</span> <span class="an">currency</span>=<span class="s"><span class="dl">&quot;</span><span class="k">INR</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;minimumDuration</span> <span class="an">period</span>=<span class="s"><span class="dl">&quot;</span><span class="k">(weeks|months|years)</span><span class="dl">&quot;</span></span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;sublettingAllowed&gt;</span>(yes|no)<span class="ta">&lt;/sublettingAllowed&gt;</span>&#x000A;    <span class="ta">&lt;/rentalTerms&gt;</span>&#x000A;    <span class="ta">&lt;amenities&gt;</span>&#x000A;      <span class="ta">&lt;study&gt;</span>(yes|no)<span class="ta">&lt;/study&gt;</span>&#x000A;      <span class="ta">&lt;vaastu&gt;</span>(yes|no)<span class="ta">&lt;/vaastu&gt;</span>&#x000A;      <span class="ta">&lt;airConditioning&gt;</span>(yes|no)<span class="ta">&lt;/airConditioning&gt;</span>&#x000A;      <span class="ta">&lt;servantQuarters&gt;</span>(yes|no)<span class="ta">&lt;/servantQuarters&gt;</span>&#x000A;      <span class="ta">&lt;elevator&gt;</span>(yes|no)<span class="ta">&lt;/elevator&gt;</span>&#x000A;      <span class="ta">&lt;heating&gt;</span>(yes|no)<span class="ta">&lt;/heating&gt;</span>&#x000A;      <span class="ta">&lt;hotWater&gt;</span>(yes|no)<span class="ta">&lt;/hotWater&gt;</span>&#x000A;      <span class="ta">&lt;dishwasher&gt;</span>(yes|no)<span class="ta">&lt;/dishwasher&gt;</span>&#x000A;      <span class="ta">&lt;dryer&gt;</span>(yes|no)<span class="ta">&lt;/dryer&gt;</span>&#x000A;      <span class="ta">&lt;powerBackup&gt;</span>(yes|no)<span class="ta">&lt;/powerBackup&gt;</span>&#x000A;      <span class="ta">&lt;swimmingPool&gt;</span>(yes|no)<span class="ta">&lt;/swimmingPool&gt;</span>&#x000A;      <span class="ta">&lt;gymnasium&gt;</span>(yes|no)<span class="ta">&lt;/gymnasium&gt;</span>&#x000A;      <span class="ta">&lt;security&gt;</span>(yes|no)<span class="ta">&lt;/security&gt;</span>&#x000A;      <span class="ta">&lt;handicapAccess&gt;</span>(yes|no)<span class="ta">&lt;/handicapAccess&gt;</span>&#x000A;      <span class="ta">&lt;tennisCourt&gt;</span>(yes|no)<span class="ta">&lt;/tennisCourt&gt;</span>&#x000A;      <span class="ta">&lt;clubHouse&gt;</span>(yes|no)<span class="ta">&lt;/clubHouse&gt;</span>&#x000A;      <span class="ta">&lt;furnished&gt;</span>(yes|no)<span class="ta">&lt;/furnished&gt;</span>&#x000A;      <span class="ta">&lt;petsAllowed&gt;</span>(yes|no)<span class="ta">&lt;/petsAllowed&gt;</span>&#x000A;      <span class="ta">&lt;smokersAllowed&gt;</span>(yes|no)<span class="ta">&lt;/smokersAllowed&gt;</span>&#x000A;      <span class="ta">&lt;broadband&gt;</span>(yes|no)<span class="ta">&lt;/broadband&gt;</span>&#x000A;      <span class="ta">&lt;cableTV&gt;</span>(yes|no)<span class="ta">&lt;/cableTV&gt;</span>&#x000A;      <span class="ta">&lt;onsiteManager&gt;</span>(yes|no)<span class="ta">&lt;/onsiteManager&gt;</span>&#x000A;      <span class="ta">&lt;other</span><span class="ta">/&gt;</span>&#x000A;    <span class="ta">&lt;/amenities&gt;</span>&#x000A;    <span class="c">&lt;!-- repeatable tag group--&gt;</span>&#x000A;    <span class="ta">&lt;attachments&gt;</span>&#x000A;      <span class="ta">&lt;photo</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;        <span class="ta">&lt;url</span><span class="ta">/&gt;</span>&#x000A;        <span class="ta">&lt;caption</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;/photo&gt;</span>&#x000A;      <span class="ta">&lt;floorplan</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;        <span class="ta">&lt;url</span><span class="ta">/&gt;</span>&#x000A;        <span class="ta">&lt;caption</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;/floorplan&gt;</span>&#x000A;      <span class="ta">&lt;video</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;        <span class="ta">&lt;url</span><span class="ta">/&gt;</span>&#x000A;        <span class="ta">&lt;caption</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;/video&gt;</span>&#x000A;      <span class="ta">&lt;document</span> <span class="an">updatedAt</span>=<span class="s"><span class="dl">&quot;</span><span class="k">YYYY-MM-DD hh:mm:ss</span><span class="dl">&quot;</span></span><span class="ta">&gt;</span>&#x000A;        <span class="ta">&lt;url</span><span class="ta">/&gt;</span>&#x000A;        <span class="ta">&lt;caption</span><span class="ta">/&gt;</span>&#x000A;      <span class="ta">&lt;/document&gt;</span>&#x000A;    <span class="ta">&lt;/attachments&gt;</span>&#x000A;  <span class="ta">&lt;/property&gt;</span>&#x000A;&#x000A;<span class="ta">&lt;/properties&gt;</span></pre></div>
+            </div>
+          </p>
+        </section>
+        <section id='elements'>
+          <h1>Elements</h1>
+          <p>
+            It is important that the XML feed is well formed and contains the required fields. You can use our <a href="#">XSD Schema</a> as an example of the feed structure.
+          </p>
+          <section id='required_elements'>
+            <h2>Required Elements</h2>
+            <p>Required fields have to be included in the feed as they contain the minimum amount of information necessary for our system to include your listings on PropertyFeast.</p>
+            <table>
+              <tr>
+                <th>Element</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>
+                  &lt;propertyId/&gt;
+                </td>
+                <td>String</td>
+                <td>ID of the listing on your website. This ID must be unique to avoid duplication.</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;officeId/&gt;
+                </td>
+                <td>String</td>
+                <td>The office identification number assigned to you by PropertyFeast.</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;status/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The status of the listing.
+                  <br />
+                  <em>active, rented, sold, under_contract, withdrawn</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;updated/&gt;
+                </td>
+                <td>Datetime</td>
+                <td>The last updated date and time of the listing</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;listingType/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The listing category for this property
+                  <br />
+                  <em>residential_sale, residential_rental</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;agent&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;name/&gt;
+                </td>
+                <td>String</td>
+                <td>The name of the listing agent</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;email/&gt;
+                </td>
+                <td>String</td>
+                <td>The email address of the listing agent</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;location&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;locality/&gt;
+                </td>
+                <td>String</td>
+                <td>Locality or neighborhood where the property is located</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;city/&gt;
+                </td>
+                <td>String</td>
+                <td>The city name where the property is located</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;region/&gt;
+                </td>
+                <td>String</td>
+                <td>The region or state name where the property is located</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;country/&gt;
+                </td>
+                <td>String</td>
+                <td>The country name where the property is located</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;details&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;headline/&gt;
+                </td>
+                <td>
+                  String
+                </td>
+                <td>
+                  The headline for the property. This is displayed in the search results and as the heading of the property.
+                  <br />
+                  <em>Min 10 Characters, Max 80 characters.</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;description/&gt;
+                </td>
+                <td>
+                  String
+                </td>
+                <td>
+                  The description of the property. Value must be enclosed in a CDATA section.
+                  <br />
+                  <em>Min 100 characters, Max 3000 characters.</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;propertyType/&gt;
+                </td>
+                <td>
+                  String
+                </td>
+                <td>
+                  The property type.
+                  <br />
+                  <em>apartment, house, penthouse, bungalow, villa, row_house, farm_house, duplex, land</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;photo&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>
+                  All properties must have a least 1 photo and a maximum of 20 photos.
+                  Photo resolution must be a minimum of 640x480 pixels. Photos that have lower resolutions than this will impact the quality score of this property.
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;url/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The url to the image.
+                  <br />
+                  <em>Acceptable formats: JPG, PNG, GIF</em>
+                </td>
+              </tr>
+            </table>
+          </section>
+          <section id='optional_elements'>
+            <h2>Optional Elements</h2>
+            <p>You are not required to include optional elements. However, to increase your exposure and rank higher in search results, we encourage that you provide all available information.</p>
+            <table>
+              <tr>
+                <th>Element</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>
+                  &lt;mlsId/&gt;
+                </td>
+                <td>String</td>
+                <td>MLS Database ID #</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;agent&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;phone/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  A valid telephone number. The type of number can be defined with the "type" attribute on the element.
+                  <br />
+                  <em>Type attribute: office, mobile, home</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;location&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;buildingName/&gt;
+                </td>
+                <td>String</td>
+                <td>The building name of the property.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;streetNumber/&gt;
+                </td>
+                <td>String</td>
+                <td>The street number of the property.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;street/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The street address of the property
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;postcode/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The postal code of the properties area
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;latitude/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>
+                  The latitude of the property
+                  <br />
+                  <em>Min -90.0, Max 90.0</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;longitude/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>
+                  The longitude of the property
+                  <br />
+                  <em>Min -180.0, Max 180.0</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;details&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;website/&gt;
+                </td>
+                <td>String</td>
+                <td>The URL of the listing on your website.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;price/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>
+                  <strong>Residential Sales:</strong>
+                  The total price of the property in the specified currency.
+                  <br />
+                  <strong>Residential Rentals:</strong>
+                  The rental price of the property in the specified currency and period.
+                  <br />
+                  <br />
+                  <em>
+                    <strong>period:</strong>
+                    weekly, fortnightly, monthly
+                    <br />
+                    <strong>currency:</strong>
+                    Currency value should conform to the
+                    <a target="_blank" href="http://en.wikipedia.org/wiki/ISO_4217">ISO4217</a> standard.
+                  </em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;priceLabel/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The price label is prepended to the price.
+                  <br />
+                  <em>priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;priceDisplayMin/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>The minimum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMax".</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;priceDisplayMax/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>The maximum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMin".</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;soldPrice/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>If the status of the property is marked as sold, this tag will be used to record a sold price. This price is not displayed anywhere publicly.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;soldDate/&gt;
+                </td>
+                <td>Date</td>
+                <td>The date on which the sale occurred.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;bedrooms/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The number of bedrooms this property has.
+                  <br />
+                  <em>Studio, 0, 1, 2, 3, 4, 5+</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;bathrooms/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The number of bathrooms this property has.
+                  <br />
+                  <em>0, 1, 2, 3, 4, 5+</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;parking/&gt;
+                </td>
+                <td>String</td>
+                <td>
+                  The number of parking spaces this property has.
+                  <em>street, carport, 0, 1, 2, 3, 4, 5+</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;dateAvailable/&gt;
+                </td>
+                <td>Date</td>
+                <td>The date the property is available. For new developments this is the date the property is "ready for possession".</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;newlyBuilt/&gt;
+                </td>
+                <td>Boolean</td>
+                <td>Whether the property is new project or has been built recently.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;projectName/&gt;
+                </td>
+                <td>String</td>
+                <td>The name of the Project</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;builder/&gt;
+                </td>
+                <td>String</td>
+                <td>The name of the builder if the property is newly built.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;yearBuilt/&gt;
+                </td>
+                <td>Integer</td>
+                <td>
+                  The year the property was built.
+                  <br />
+                  <em>Format: YYYY</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;floorNumber/&gt;
+                </td>
+                <td>Integer</td>
+                <td>The floor number of the property if within a multi-story building.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;landArea/&gt;
+                </td>
+                <td>Integer</td>
+                <td>
+                  The total land area of the property.
+                  <br />
+                  The unit attribute allows the following values:
+                  <br />
+                  <em>feet, meters, acres, hectares</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;coveredArea/&gt;
+                </td>
+                <td>Integer</td>
+                <td>
+                  The total covered area of the property.
+                  <br />
+                  The unit attribute allows the following values:
+                  <br />
+                  <em>feet, meters</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;carpetedArea/&gt;
+                </td>
+                <td>Integer</td>
+                <td>
+                  The total carpeted area of the property.
+                  <br />
+                  The unit attribute allows the following values:
+                  <br />
+                  <em>feet, meters</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;builtupArea/&gt;
+                </td>
+                <td>Integer</td>
+                <td>
+                  The total builtup area of the property.
+                  <br />
+                  The unit attribute allows the following values:
+                  <br />
+                  <em>feet, meters</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;rentalTerms&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;deposit/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>The rental deposit for the property</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;minimumDuration/&gt;
+                </td>
+                <td>Decimal</td>
+                <td>
+                  The minimum rental duration
+                  <br />
+                  The period attribute defines the values period.
+                  <em>weeks, months, years</em>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;amenities&gt;
+                </td>
+                <td>Boolean</td>
+                <td>All amenities are boolean values.</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;other/&gt;
+                </td>
+                <td>String</td>
+                <td>A comma seperated list of additional amenities</td>
+              </tr>
+              <tr>
+                <td>
+                  &lt;attachments&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td class='indent'>
+                  &lt;photo&gt;
+                  <br />
+                  &lt;floorplan&gt;
+                  <br />
+                  &lt;video&gt;
+                  <br />
+                  &lt;document&gt;
+                </td>
+                <td>&nbsp;</td>
+                <td>
+                  <strong>Acceptable Formats</strong>
+                  <br />
+                  <em>Photo/Floorplan: jpg, gif, png</em>
+                  <br />
+                  <em>Video: mov, avi, mpg, flv, wmv</em>
+                  <br />
+                  <em>Document: pdf</em>
+                </td>
+              </tr>
+              <tr>
+                <td class='indent2'>
+                  &lt;url/&gt;
+                </td>
+                <td>String</td>
+                <td>The url for the attachment</td>
+              </tr>
+              <tr>
+                <td class='indent2'>
+                  &lt;caption/&gt;
+                </td>
+                <td>String</td>
+                <td>The caption to be displayed with the attachment</td>
+              </tr>
+              <tr>
+                <td class='indent2'>
+                  &lt;description/&gt;
+                </td>
+                <td>String</td>
+                <td>The description of the attachment. This helps optimize search engine keywords.</td>
+              </tr>
+            </table>
+          </section>
+          <section id='illegal_characters'>
+            <h2>Illegal Characters</h2>
+            <p>When an XML element is parsed there can be an issue with any text that has illegal XML characters. There are two preferred methods to avoid breaking the XML parser.</p>
+            <h4>Escaped Characters</h4>
+            <p>Replace any illegal characters with the escaped characters shown below.</p>
+            <table id='illegal-characters'>
+              <tr>
+                <th>Illegal</th>
+                <th>Escaped</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>&amp;</td>
+                <td>
+                  &amp;amp;
+                </td>
+                <td>Ampersand</td>
+              </tr>
+              <tr>
+                <td>&apos;</td>
+                <td>
+                  &amp;apos;
+                </td>
+                <td>Apostrophe</td>
+              </tr>
+              <tr>
+                <td>&gt;</td>
+                <td>
+                  &amp;gt;
+                </td>
+                <td>Greater Than</td>
+              </tr>
+              <tr>
+                <td>&lt;</td>
+                <td>
+                  &amp;lt;
+                </td>
+                <td>Less Than</td>
+              </tr>
+              <tr>
+                <td>&quot;</td>
+                <td>
+                  &amp;quot;
+                </td>
+                <td>Quotation Mark</td>
+              </tr>
+            </table>
+            <h4>CDATA Section</h4>
+            <p>Enclose the tag value within a CDATA section. For example, the following is valid</p>
+            <div class="CodeRay">
+              <div class="code"><pre><span class="ta">&lt;description&gt;</span>&#x000A;  <span class="er">&lt;</span>![CDATA[This contains &quot;illegal&quot; characters like <span class="er">&amp;</span> but that's okay!]]<span class="er">&gt;</span>&#x000A;<span class="ta">&lt;/description&gt;</span>&#x000A;</pre></div>
+            </div>
+          </section>
+          <section id='case_sensitivity'>
+            <h2>Case Sensitivity</h2>
+            <p>Elements are case sensitive and are camelcased. This also applies to attributes</p>
+            <div class="CodeRay">
+              <div class="code"><pre><span class="ta">&lt;propertyType&gt;</span>apartment<span class="ta">&lt;/propertyType&gt;</span>&#x000A;</pre></div>
+            </div>
+          </section>
+          <section id='date_format'>
+            <h2>Date &amp; Time Formats</h2>
+            <h3>Datetime</h3>
+            <p>A Datetime field is identified by the combination of a date and a time. Its value space is described as a "combination of date and time of day" in Chapter 5.4 of ISO 8601.</p>
+            <p>Its lexical space is the extended format:</p>
+            <div class="CodeRay">
+              <div class="code"><pre>[-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]&#x000A;</pre></div>
+            </div>
+            <p>Valid examples:</p>
+            <div class="CodeRay">
+              <div class="code"><pre>2001-10-26T21:32:52&#x000A;2001-10-26T21:32:52+02:00&#x000A;2001-10-26T19:32:52Z&#x000A;2001-10-26T19:32:52+00:00&#x000A;-2001-10-26T21:32:52&#x000A;2001-10-26T21:32:52.12679&#x000A;</pre></div>
+            </div>
+            <h3>Date</h3>
+            <p>This datatype is modeled after the calendar dates defined in Chapter 5.2.1 of ISO (International Organization for Standardization) 8601. Its value space is the set of Gregorian calendar dates as defined by this standard; i.e., a one-day-long period of time. Its lexical space is the ISO 8601 extended format:</p>
+            <div class="CodeRay">
+              <div class="code"><pre>[-]CCYY-MM-DD[Z|(+|-)hh:mm]&#x000A;</pre></div>
+            </div>
+            <p>Valid examples:</p>
+            <div class="CodeRay">
+              <div class="code"><pre>2001-10-26&#x000A;2001-10-26+02:00&#x000A;2001-10-26Z&#x000A;2001-10-26+00:00&#x000A;-2001-10-26&#x000A;-20000-04-01&#x000A;</pre></div>
+            </div>
+          </section>
+          <section id='attachments'>
+            <h2>Attachments</h2>
+            <p>Photos, floorplans and videos are shown in the order they are listed. The first photo in the list is used as the thumbnail for the property in search results.</p>
+          </section>
+          <section id='repeatable'>
+            <h2>Repeatable tags</h2>
+            <p>Some tags in the specification have been marked as repeatable. This means if there are multiple tags of the same type, the details will be merged.</p>
+            <em>Example: You can list a group of properties with 2,3 and 4 bedrooms by repeating the tags with the values.</em>
+            <div class="CodeRay">
+              <div class="code"><pre><span class="ta">&lt;bedrooms&gt;</span>2<span class="ta">&lt;/bedrooms&gt;</span>&#x000A;<span class="ta">&lt;bedrooms&gt;</span>3<span class="ta">&lt;/bedrooms&gt;</span>&#x000A;<span class="ta">&lt;bedrooms&gt;</span>4<span class="ta">&lt;/bedrooms&gt;</span></pre></div>
+            </div>
+          </section>
+        </section>
+        <section id='validate'>
+          <h1>Validation</h1>
+          <p>
+            Propertyfeast.com
+          </p>
+        </section>
+        <section id='delivery'>
+          <h1>Delivery</h1>
+          <p>
+            Feeds are downloaded once a day from either a web or FTP server. An email report is generated if any listings have been imported, updated or failed. It is important that this feed is kept up to date and contains all listings that should be shown on the PropertyFeast website as well as ones that have been withdrawn sold or rented.
+          </p>
+        </section>
+      </article>
     </div>
-
-    <h1><a href="http://github.com/propertyfeast/pfml">pfml</a>
-      <span class="small">by <a href="http://github.com/propertyfeast">propertyfeast</a></span></h1>
-
-    <div class="description">
-      Property Feed Markup Language
-    </div>
-
-    <h2>Contact</h2>
-<p> (christos@propertyfeast.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/propertyfeast/pfml/zipball/master">zip</a> or
-      <a href="http://github.com/propertyfeast/pfml/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/propertyfeast/pfml</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/propertyfeast/pfml">propertyfeast/pfml</a>
-    </div>
-
-  </div>
-
-  
-</body>
+  </body>
 </html>
