@@ -52,7 +52,7 @@ configure :build do
   # activate :ugly_haml
   
   # Or use a different image path
-  # set :http_path, "/Content/images/"
+  # set :http_path, "/pfml/images/"
 end
 
 Haml::Filters::CodeRay.encoder_options = { :tab_width => 2, :css => :class }
