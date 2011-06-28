@@ -425,7 +425,13 @@ currency: Currency value should conform to ISO4217</xs:documentation>
             </xs:all>
           </xs:complexType>
         </xs:element>
-        <xs:element name="leaseType" type="xs:string"/>
+        <xs:element name="leaseType">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="daily|weekly|fortnightly|monthly|yearly"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
         <xs:element minOccurs="1" name="leaseDuration">
           <xs:annotation>
             <xs:documentation>The minimum rental duration (weeks, months, years)</xs:documentation>
