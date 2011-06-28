@@ -1,635 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="properties">
-    <xs:complexType>
-      <xs:sequence maxOccurs="unbounded">
-        <xs:element ref="property"/>
-      </xs:sequence>
-      <xs:attribute name="updatedAt" use="required" type="xs:dateTime">
-        <xs:annotation>
-          <xs:documentation>The date and time the feed was updated</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="property">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="propertyId" maxOccurs="1" minOccurs="1">
-          <xs:annotation>
-            <xs:documentation>ID of the listing on your website. This ID must be unique to avoid duplication.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="officeId">
-          <xs:annotation>
-            <xs:documentation>The office identification number assigned to you by PropertyFeast.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="mlsId" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: MLS Database ID #</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="status">
-          <xs:annotation>
-            <xs:documentation>The status of the listing.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="updated">
-          <xs:annotation>
-            <xs:documentation>The last updated date and time of the listing.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="listingType">
-          <xs:annotation>
-            <xs:documentation>The listing category for this property. (residential_sale, residential_rental)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="agent"/>
-        <xs:element ref="location"/>
-        <xs:element ref="details"/>
-        <xs:element ref="rentalTerms" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: Additional rental information if the listing type is a rental</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="amenities" minOccurs="0"/>
-        <xs:element ref="attachments"/>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="propertyId" type="string100"/>
-  <xs:element name="officeId" type="string100"/>
-  <xs:element name="mlsId" type="string100"/>
-  <xs:element name="status">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="active"/>
-        <xs:enumeration value="sold"/>
-        <xs:enumeration value="under_contract"/>
-        <xs:enumeration value="rented"/>
-        <xs:enumeration value="leased"/>
-        <xs:enumeration value="draft"/>
-        <xs:enumeration value="withdrawn"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="updated" type="xs:dateTime"/>
-  <xs:element name="listingType" type="xs:NCName"/>
-  <xs:element name="agent">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="name">
-          <xs:annotation>
-            <xs:documentation>The name of the listing agent</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="phone" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>A valid telephone number. The type of number can be defined with the "type" attribute on the element.
-
-Type attribute: office, mobile, home</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="email">
-          <xs:annotation>
-            <xs:documentation>The email address of the listing agent.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="photo" minOccurs="0"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="name" type="string100"/>
-  <xs:element name="phone">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:integer">
-          <xs:attribute name="allowSMS" use="required" type="boolean"/>
-          <xs:attribute name="type" use="required">
-            <xs:simpleType>
-              <xs:restriction base="xs:string">
-                <xs:enumeration value="office"/>
-                <xs:enumeration value="home"/>
-                <xs:enumeration value="mobile"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="email" type="email"/>
-  <xs:element name="location">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="buildingName" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The building name of the property.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="streetNumber" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The street number of the property.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="street" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The street address of the property</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="locality">
-          <xs:annotation>
-            <xs:documentation>Locality or neighborhood where the property is located.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="city">
-          <xs:annotation>
-            <xs:documentation>The city name where the property is located</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="region">
-          <xs:annotation>
-            <xs:documentation>The region or state name where the property is located</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="country">
-          <xs:annotation>
-            <xs:documentation>The country name where the property is located</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="postcode" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The postal code of the properties area</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="longitude" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The longitude of the property. (Min -180.0, Max 180.0)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="latitude" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The latitude of the property (Min -90.0, Max 90.0)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:all>
-      <xs:attribute name="display" use="required" type="boolean">
-        <xs:annotation>
-          <xs:documentation>Display the full address. If false then only the suburb name will be shown.</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="buildingName" type="string100"/>
-  <xs:element name="streetNumber" type="string100"/>
-  <xs:element name="street" type="string100"/>
-  <xs:element name="locality" type="string100"/>
-  <xs:element name="city" type="string100"/>
-  <xs:element name="region" type="string100"/>
-  <xs:element name="country" type="string100"/>
-  <xs:element name="postcode" type="string100"/>
-  <xs:element name="longitude" type="longitude"/>
-  <xs:element name="latitude" type="latitude"/>
-  <xs:element name="details">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="headline" maxOccurs="1">
-          <xs:annotation>
-            <xs:documentation>The headline for the property. This is displayed in the search results and as the heading of the property. (Min 10 Characters, Max 80 characters)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="description">
-          <xs:annotation>
-            <xs:documentation>The description of the property. Value must be enclosed in a CDATA section. (Min 100 characters, Max 3000 characters)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="propertyType">
-          <xs:annotation>
-            <xs:documentation>The property type. (apartment, house, penthouse, bungalow, villa, row_house, farm_house, duplex, land)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="website" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The URL of the listing on your website.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="price" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional:
-
-Residential Sales: The total price of the property in the specified currency.
-
-Residential Rentals: The rental price of the property in the specified currency and period.
-
-period: weekly, fortnightly, monthly
-currency: Currency value should conform to ISO4217</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="priceLabel" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The price label is prepended to the price.
-(priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="priceDisplayMin" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The minimum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMax".</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="priceDisplayMax" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The maximum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMin".</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="soldPrice" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: If the status of the property is marked as sold, this tag will be used to record a sold price. This price is not displayed anywhere publicly.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="soldDate" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The date on which the sale occurred.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="bedrooms" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The number of bedrooms this property has. (Studio, 0, 1, 2, 3, 4, 5+)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="bathrooms" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The number of bathrooms this property has. (0, 1, 2, 3, 4, 5+)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="parking" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The number of parking spaces this property has. (street, carport, 0, 1, 2, 3, 4, 5+)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="dateAvailable" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The date the property is available. For new developments this is the date the property is "ready for possession".</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="newlyBuilt" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: Whether the property is new project or has been built recently.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="projectName" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The name of the new Project</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="builder" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The name of the builder if the property is newly built.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="yearBuilt" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The year the property was built. </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="architectureStyle" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation/>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="floorNumber" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The floor number of the property if within a multi-story building.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="landArea" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The total land area of the property. (feet, meters, acres, hectares)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="coveredArea" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The total covered area of the property. (feet, meters)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="carpetedArea" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The total carpeted area of the property. (feet, meters)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="builtupArea" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: The total builtup area of the property. (feet, meters)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="headline">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:maxLength value="80"/>
-        <xs:minLength value="10"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="propertyType">
-    <xs:simpleType>
-      <xs:restriction base="string100">
-        <xs:enumeration value="apartment"/>
-        <xs:enumeration value="house"/>
-        <xs:enumeration value="penthouse"/>
-        <xs:enumeration value="bungalow"/>
-        <xs:enumeration value="villa"/>
-        <xs:enumeration value="row_house"/>
-        <xs:enumeration value="farm_house"/>
-        <xs:enumeration value="duplex"/>
-        <xs:enumeration value="land"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="website" type="xs:anyURI"/>
-  <xs:element name="price">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="price">
-          <xs:attribute name="currency" type="currency"/>
-          <xs:attribute name="period">
-            <xs:simpleType>
-              <xs:restriction base="string100">
-                <xs:enumeration value="monthly"/>
-                <xs:enumeration value="weekly"/>
-                <xs:enumeration value="fortnightly"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="priceLabel">
-    <xs:simpleType>
-      <xs:restriction base="string100">
-        <xs:enumeration value="priced_at"/>
-        <xs:enumeration value="priced_from"/>
-        <xs:enumeration value="price_on_request"/>
-        <xs:enumeration value="priced_between"/>
-        <xs:enumeration value="offers_over"/>
-        <xs:enumeration value="reduced_to"/>
-        <xs:enumeration value="negotiable"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="priceDisplayMin" type="price"/>
-  <xs:element name="priceDisplayMax" type="price"/>
-  <xs:element name="soldPrice" type="price"> </xs:element>
-  <xs:element name="soldDate" type="xs:date"/>
-  <xs:element name="bedrooms">
-    <xs:simpleType>
-      <xs:restriction base="string100">
-        <xs:enumeration value="studio"/>
-        <xs:enumeration value="0"/>
-        <xs:enumeration value="1"/>
-        <xs:enumeration value="2"/>
-        <xs:enumeration value="3"/>
-        <xs:enumeration value="4"/>
-        <xs:enumeration value="5+"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="bathrooms">
-    <xs:simpleType>
-      <xs:restriction base="string100">
-        <xs:enumeration value="0"/>
-        <xs:enumeration value="1"/>
-        <xs:enumeration value="2"/>
-        <xs:enumeration value="3"/>
-        <xs:enumeration value="4"/>
-        <xs:enumeration value="5+"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="parking">
-    <xs:simpleType>
-      <xs:restriction base="string100">
-        <xs:enumeration value="street"/>
-        <xs:enumeration value="carport"/>
-        <xs:enumeration value="0"/>
-        <xs:enumeration value="1"/>
-        <xs:enumeration value="2"/>
-        <xs:enumeration value="3"/>
-        <xs:enumeration value="4"/>
-        <xs:enumeration value="5+"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="dateAvailable" type="xs:date"/>
-  <xs:element name="newlyBuilt" type="boolean"/>
-  <xs:element name="projectName" type="string100"/>
-  <xs:element name="builder" type="string100"/>
-  <xs:element name="yearBuilt" type="xs:gYear"/>
-  <xs:element name="architectureStyle" type="string100"/>
-  <xs:element name="floorNumber" type="xs:integer"/>
-  <xs:element name="landArea">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:decimal">
-          <xs:attribute name="unit" type="unit"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="coveredArea">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:decimal">
-          <xs:attribute name="unit" type="unit"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="carpetedArea">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:decimal">
-          <xs:attribute name="unit" type="unit"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="builtupArea">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:decimal">
-          <xs:attribute name="unit" type="unit"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="rentalTerms">
-    <xs:complexType>
-      <xs:all minOccurs="0">
-        <xs:element ref="deposit">
-          <xs:annotation>
-            <xs:documentation>The rental deposit for the property</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="minimumDuration" minOccurs="1">
-          <xs:annotation>
-            <xs:documentation>The minimum rental duration (weeks, months, years)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="sublettingAllowed" minOccurs="0"/>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="deposit">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="price">
-          <xs:attribute name="currency" type="currency"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="minimumDuration">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:integer">
-          <xs:attribute name="period"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="sublettingAllowed" type="boolean"/>
-  <xs:element name="amenities">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="study" minOccurs="0"/>
-        <xs:element ref="vaastu" minOccurs="0"/>
-        <xs:element ref="airConditioning" minOccurs="0"/>
-        <xs:element ref="servantQuarters" minOccurs="0"/>
-        <xs:element ref="elevator" minOccurs="0"/>
-        <xs:element ref="heating" minOccurs="0"/>
-        <xs:element ref="hotWater" maxOccurs="1" minOccurs="0"/>
-        <xs:element ref="dishwasher" minOccurs="0"/>
-        <xs:element ref="dryer" minOccurs="0"/>
-        <xs:element ref="powerBackup" minOccurs="0"/>
-        <xs:element ref="swimmingPool" minOccurs="0"/>
-        <xs:element ref="gymnasium" minOccurs="0"/>
-        <xs:element ref="security" minOccurs="0"/>
-        <xs:element ref="handicapAccess" minOccurs="0"/>
-        <xs:element ref="tennisCourt" minOccurs="0"/>
-        <xs:element ref="clubHouse" minOccurs="0"/>
-        <xs:element ref="furnished" minOccurs="0"/>
-        <xs:element ref="petsAllowed" minOccurs="0"/>
-        <xs:element ref="smokersAllowed" minOccurs="0"/>
-        <xs:element ref="broadband" minOccurs="0"/>
-        <xs:element ref="cableTV" minOccurs="0"/>
-        <xs:element ref="onsiteManager" minOccurs="0"/>
-        <xs:element ref="other" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: A comma seperated list of additional amenities</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="study" type="boolean"/>
-  <xs:element name="vaastu" type="boolean"/>
-  <xs:element name="airConditioning" type="boolean"/>
-  <xs:element name="servantQuarters" type="boolean"/>
-  <xs:element name="elevator" type="boolean"/>
-  <xs:element name="heating" type="boolean"/>
-  <xs:element name="hotWater" type="boolean"/>
-  <xs:element name="dishwasher" type="boolean"/>
-  <xs:element name="dryer" type="boolean"/>
-  <xs:element name="powerBackup" type="boolean"/>
-  <xs:element name="swimmingPool" type="boolean"/>
-  <xs:element name="gymnasium" type="boolean"/>
-  <xs:element name="security" type="boolean"/>
-  <xs:element name="handicapAccess" type="boolean"/>
-  <xs:element name="tennisCourt" type="boolean"/>
-  <xs:element name="clubHouse" type="boolean"/>
-  <xs:element name="furnished" type="boolean"/>
-  <xs:element name="petsAllowed" type="boolean"/>
-  <xs:element name="smokersAllowed" type="boolean"/>
-  <xs:element name="broadband" type="boolean"> </xs:element>
-  <xs:element name="cableTV" type="boolean"/>
-  <xs:element name="onsiteManager" type="boolean"/>
-  <xs:element name="other" type="xs:string"/>
-  <xs:element name="attachments">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="photo" maxOccurs="20">
-          <xs:annotation>
-            <xs:documentation>At least one photo is required per listing. (jpg, gif, png)</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="floorplan" maxOccurs="10" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: jpg, gif, png</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="video" maxOccurs="2" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: mov, avi, mpg, flv, wmv</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element ref="document" maxOccurs="2" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>Optional: pdf</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="floorplan">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="url"/>
-        <xs:element ref="caption" minOccurs="0"/>
-      </xs:all>
-      <xs:attribute name="updatedAt" use="required" type="xs:dateTime"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="video">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="url"/>
-        <xs:element ref="caption" minOccurs="0"/>
-      </xs:all>
-      <xs:attribute name="updatedAt" use="required" type="xs:dateTime"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="document">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="url"/>
-        <xs:element ref="caption" minOccurs="0"/>
-      </xs:all>
-      <xs:attribute name="updatedAt" use="required" type="xs:dateTime"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="photo">
-    <xs:complexType>
-      <xs:all>
-        <xs:element ref="url"/>
-        <xs:element ref="caption" minOccurs="0"/>
-      </xs:all>
-      <xs:attribute name="updatedAt" use="required" type="xs:dateTime"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="description">
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:maxLength value="3000"/>
-        <xs:minLength value="100"/>
-      </xs:restriction>
-    </xs:simpleType>
-  </xs:element>
-  <xs:element name="url" type="xs:anyURI"/>
-  <xs:element name="caption" type="string100"/>
   <xs:simpleType name="price">
     <xs:annotation>
       <xs:documentation>Pattern for prices</xs:documentation>
@@ -702,6 +72,11 @@ currency: Currency value should conform to ISO4217</xs:documentation>
       <xs:maxLength value="100"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="string255">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="boolean">
     <xs:annotation>
       <xs:documentation>Boolean (true, false, yes, no, 0 or 1)</xs:documentation>
@@ -715,4 +90,543 @@ currency: Currency value should conform to ISO4217</xs:documentation>
       <xs:enumeration value="1"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:element name="status">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="active"/>
+        <xs:enumeration value="sold"/>
+        <xs:enumeration value="under_contract"/>
+        <xs:enumeration value="rented"/>
+        <xs:enumeration value="leased"/>
+        <xs:enumeration value="draft"/>
+        <xs:enumeration value="withdrawn"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="updated" type="xs:dateTime"/>
+  <xs:element name="listingType" type="xs:NCName"/>
+  <xs:element name="name" type="string100"/>
+  <xs:element name="phone">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:integer">
+          <xs:attribute name="type" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="office"/>
+                <xs:enumeration value="home"/>
+                <xs:enumeration value="mobile"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="email" type="email"/>
+  <xs:element name="headline">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="80"/>
+        <xs:minLength value="10"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="propertyType">
+    <xs:simpleType>
+      <xs:restriction base="string100">
+        <xs:enumeration value="apartment"/>
+        <xs:enumeration value="house"/>
+        <xs:enumeration value="penthouse"/>
+        <xs:enumeration value="bungalow"/>
+        <xs:enumeration value="villa"/>
+        <xs:enumeration value="row_house"/>
+        <xs:enumeration value="farm_house"/>
+        <xs:enumeration value="duplex"/>
+        <xs:enumeration value="land"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="bedrooms">
+    <xs:simpleType>
+      <xs:restriction base="string100">
+        <xs:pattern value="studio|(\d+([\.|\-|,]\d{1})?)?"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="bathrooms">
+    <xs:simpleType>
+      <xs:restriction base="string100">
+        <xs:pattern value="(\d+([\.|\-|,]\d{1})?)?"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="parking">
+    <xs:simpleType>
+      <xs:restriction base="string100">
+        <xs:pattern value="street|carport|(\d+)"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="dateAvailable" type="xs:date"/>
+  <xs:element name="description">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="3000"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="url" type="xs:anyURI"/>
+  <xs:element name="caption" type="string100"/>
+  <xs:element name="currency" type="string100"/>
+  <xs:element name="amount" type="price"/>
+  <xs:element name="minAmount" type="price"/>
+  <xs:element name="maxAmount" type="price"/>
+  <xs:element name="area">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:decimal">
+          <xs:attribute name="unit" type="unit"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listings">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="listing"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="1" name="listingId" type="string100">
+          <xs:annotation>
+            <xs:documentation>ID of the property on your website. This ID must be unique to avoid duplication.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="listingType">
+          <xs:annotation>
+            <xs:documentation>The listing category for this property. (residential_sale, residential_rental)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="companyId">
+          <xs:annotation>
+            <xs:documentation>The company identification number assigned to you by PropertyFeast.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="status">
+          <xs:annotation>
+            <xs:documentation>The status of the listing.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="listingUrl" type="xs:anyURI">
+          <xs:annotation>
+            <xs:documentation>Optional: The URL of the listing on your website.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="updated">
+          <xs:annotation>
+            <xs:documentation>The last updated date and time of the listing.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="agent"/>
+        <xs:element ref="location"/>
+        <xs:element ref="details"/>
+        <xs:element ref="attachments"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="agent">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="name">
+          <xs:annotation>
+            <xs:documentation>The name of the listing agent</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="phone" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>A valid telephone number. The type of number can be defined with the "type" attribute on the element.
+
+Type attribute: office, mobile, home</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="email">
+          <xs:annotation>
+            <xs:documentation>The email address of the listing agent.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="photo">
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="url"/>
+              <xs:element ref="updated"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="location">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="buildingName" type="string100">
+          <xs:annotation>
+            <xs:documentation>Optional: The building name of the property.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="streetNumber" type="string100">
+          <xs:annotation>
+            <xs:documentation>Optional: The street number of the property.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="street" type="string100">
+          <xs:annotation>
+            <xs:documentation>Optional: The street address of the property</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="locality" type="string100">
+          <xs:annotation>
+            <xs:documentation>Locality or neighborhood where the property is located.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="city" type="string100">
+          <xs:annotation>
+            <xs:documentation>The city name where the property is located</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="region" type="string100">
+          <xs:annotation>
+            <xs:documentation>The region or state name where the property is located</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="country" type="string100">
+          <xs:annotation>
+            <xs:documentation>The country name where the property is located</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="postcode" type="string100">
+          <xs:annotation>
+            <xs:documentation>Optional: The postal code of the properties area</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="longitude" type="longitude">
+          <xs:annotation>
+            <xs:documentation>Optional: The longitude of the property. (Min -180.0, Max 180.0)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="latitude" type="longitude">
+          <xs:annotation>
+            <xs:documentation>Optional: The latitude of the property (Min -90.0, Max 90.0)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="directions" type="string255">
+          <xs:annotation>
+            <xs:documentation>Optional: The driving directions to the location.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="showAddress" type="boolean">
+          <xs:annotation>
+            <xs:documentation>Optional: Display the full address. If false then only the suburb name will be shown.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="details">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="headline" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The headline for the property. This is displayed in the search results and as the heading of the property. (Min 10 Characters, Max 80 characters)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="description" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The description of the property. Value must be enclosed in a CDATA section. (Min 100 characters, Max 3000 characters)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="propertyType" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>The property type. (apartment, house, penthouse, bungalow, villa, row_house, farm_house, duplex, land)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="bedrooms" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Optional: The number of bedrooms this property has. (Studio, 0, 1, 2, 3, 4, 5+)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="bathrooms" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Optional: The number of bathrooms this property has. (0, 1, 2, 3, 4, 5+)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="parking" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Optional: The number of parking spaces this property has. (street, carport, 0, 1, 2, 3, 4, 5+)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="dateAvailable" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional: The date the property is available. For new developments this is the date the property is "ready for possession".</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="price" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Residential Sales: The total price of the property in the specified currency.
+
+Residential Rentals: The rental price of the property in the specified currency and period.
+
+period: weekly, fortnightly, monthly
+currency: Currency value should conform to ISO4217</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="soldPrice">
+          <xs:annotation>
+            <xs:documentation>Optional: If the status of the property is marked as sold, this tag will be used to record a sold price. This price is not displayed anywhere publicly.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="amount"/>
+              <xs:element ref="currency"/>
+              <xs:element minOccurs="0" name="saleDate" type="xs:date">
+                <xs:annotation>
+                  <xs:documentation>Optional: The date on which the sale occurred.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="rentalTerms" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional: Additional rental information if the listing type is a rental</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" ref="building"/>
+        <xs:element minOccurs="0" ref="land"/>
+        <xs:element minOccurs="0" ref="project"/>
+        <xs:element ref="amenities" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rentalTerms">
+    <xs:complexType>
+      <xs:all minOccurs="0">
+        <xs:element name="deposit">
+          <xs:annotation>
+            <xs:documentation>The rental deposit for the property</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:all>
+              <xs:element ref="amount"/>
+              <xs:element ref="currency"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="leaseType" type="xs:string"/>
+        <xs:element minOccurs="1" name="leaseDuration">
+          <xs:annotation>
+            <xs:documentation>The minimum rental duration (weeks, months, years)</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:integer">
+                <xs:attribute name="period">
+                  <xs:simpleType>
+                    <xs:restriction base="string100">
+                      <xs:pattern value="days|weeks|months|years"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:attribute>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="amenities">
+    <xs:complexType>
+      <xs:all>
+        <xs:element minOccurs="0" name="study" type="boolean"/>
+        <xs:element minOccurs="0" name="vaastu" type="boolean"/>
+        <xs:element minOccurs="0" name="airConditioning" type="boolean"/>
+        <xs:element minOccurs="0" name="servantQuarters" type="boolean"/>
+        <xs:element minOccurs="0" name="elevator" type="boolean"/>
+        <xs:element minOccurs="0" name="heating" type="boolean"/>
+        <xs:element maxOccurs="1" minOccurs="0" name="hotWater" type="boolean"/>
+        <xs:element minOccurs="0" name="dishwasher" type="boolean"/>
+        <xs:element minOccurs="0" name="dryer" type="boolean"/>
+        <xs:element minOccurs="0" name="powerBackup" type="boolean"/>
+        <xs:element minOccurs="0" name="swimmingPool" type="boolean"/>
+        <xs:element minOccurs="0" name="gymnasium" type="boolean"/>
+        <xs:element minOccurs="0" name="security" type="boolean"/>
+        <xs:element minOccurs="0" name="handicapAccess" type="boolean"/>
+        <xs:element minOccurs="0" name="tennisCourt" type="boolean"/>
+        <xs:element minOccurs="0" name="clubHouse" type="boolean"/>
+        <xs:element minOccurs="0" name="furnished" type="boolean"/>
+        <xs:element minOccurs="0" name="petsAllowed" type="boolean"/>
+        <xs:element minOccurs="0" name="smokersAllowed" type="boolean"/>
+        <xs:element minOccurs="0" name="broadband" type="boolean"/>
+        <xs:element minOccurs="0" name="cableTV" type="boolean"/>
+        <xs:element minOccurs="0" name="onsiteManager" type="boolean"/>
+        <xs:element minOccurs="0" name="otherAmenities" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Optional: A comma seperated list of additional amenities</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attachments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="photo" maxOccurs="20">
+          <xs:annotation>
+            <xs:documentation>At least one photo is required per listing. (jpg, gif, png)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="floorplan" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional: jpg, gif, png</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="video" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional: mov, avi, mpg, flv, wmv</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="document" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Optional: pdf</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="floorplan">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="url"/>
+        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element ref="updated"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="video">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="url"/>
+        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element ref="updated"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="document">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="url"/>
+        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element ref="updated"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="photo">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="url"/>
+        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element ref="updated"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="price">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="amount"/>
+        <xs:element ref="currency"/>
+        <xs:element minOccurs="0" name="label">
+          <xs:annotation>
+            <xs:documentation>Optional: The price label is prepended to the price.
+(priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable)</xs:documentation>
+          </xs:annotation>
+          <xs:simpleType>
+            <xs:restriction base="string100">
+              <xs:pattern
+                value="priced_at|priced_from|price_on_request|priced_between|offers_over|reduced_to|negotiable"
+              />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element minOccurs="0" ref="minAmount">
+          <xs:annotation>
+            <xs:documentation>Optional: The minimum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMax".</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" ref="maxAmount">
+          <xs:annotation>
+            <xs:documentation>Optional: The maximum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMin".</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="building">
+    <xs:complexType>
+      <xs:all minOccurs="1">
+        <xs:element minOccurs="0" name="newlyBuilt" type="boolean"/>
+        <xs:element minOccurs="0" name="yearBuilt" type="xs:gYear"/>
+        <xs:element minOccurs="0" name="floorNumber" type="xs:integer"/>
+        <xs:element minOccurs="0" name="architectureStyle" type="string100"/>
+        <xs:element minOccurs="0" name="orientation">
+          <xs:simpleType>
+            <xs:restriction base="string100">
+              <xs:pattern value="north|north_west|north_east|south|south_west|south_east|west|east"
+              />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element maxOccurs="1" minOccurs="0" ref="area"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="land">
+    <xs:complexType>
+      <xs:all>
+        <xs:element maxOccurs="1" minOccurs="0" ref="area"/>
+        <xs:element minOccurs="0" name="frontage">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:decimal">
+                <xs:attribute name="unit" type="unit"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="project">
+    <xs:complexType>
+      <xs:all>
+        <xs:element ref="name">
+          <xs:annotation>
+            <xs:documentation>Optional: The name of the new Project</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="builder" type="string100">
+          <xs:annotation>
+            <xs:documentation>Optional: The name of the builder if the property is newly built.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="completionDate" type="xs:date"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
