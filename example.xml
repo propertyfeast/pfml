@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <listings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="pfml2.xsd">
+    xsi:noNamespaceSchemaLocation="pfml.xsd">
 
     <listing>
-        <listingId>1234</listingId>
-        <listingType>commercial_sale</listingType>
+        <id>1234</id>
+        <type>residential_sale</type>
         <companyId>AG0001</companyId>
         <status>active</status>
         <listingUrl>http://www.yourcompany.com/1234/</listingUrl>
