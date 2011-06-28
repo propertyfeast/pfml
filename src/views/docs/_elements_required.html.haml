@@ -9,15 +9,24 @@
     %tr
       %td
         :escaped
-          <propertyId/>
+          <listingId/>
       %td String
       %td ID of the listing on your website. This ID must be unique to avoid duplication.
     %tr
       %td
         :escaped
-          <officeId/>
+          <listingType/>
       %td String
-      %td The office identification number assigned to you by PropertyFeast.
+      %td 
+        The listing category for this property
+        %br
+        %em residential_sale, residential_rental
+    %tr
+      %td
+        :escaped
+          <companyId/>
+      %td String
+      %td The company identification number assigned to you by PropertyFeast.
     %tr
       %td
         :escaped
@@ -33,15 +42,7 @@
           <updated/>
       %td Datetime
       %td The last updated date and time of the listing
-    %tr
-      %td
-        :escaped
-          <listingType/>
-      %td String
-      %td 
-        The listing category for this property
-        %br
-        %em residential_sale, residential_rental
+
     %tr
       %td 
         :escaped
@@ -129,7 +130,8 @@
     %tr
       %td
         :escaped
-          <photo>
+          <attachments>
+          <photo/>
       %td &nbsp;
       %td
         All properties must have a least 1 photo and a maximum of 20 photos.

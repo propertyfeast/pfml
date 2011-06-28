@@ -6,19 +6,16 @@
       %th Element
       %th Type
       %th Description
-
     %tr
       %td
         :escaped
-          <mlsId/>
-      %td String
-      %td MLS Database ID #
+          <listingUrl/>
+      %td URL
+      %td The URL of the listing on your website.
     %tr
       %td
         :escaped
           <agent>
-      %td &nbsp;
-      %td &nbsp;
     %tr
       %td.indent
         :escaped
@@ -28,13 +25,29 @@
         A valid telephone number. The type of number can be defined with the "type" attribute on the element.
         %br
         %em Type attribute: office, mobile, home
-    
+    %tr
+      %td.indent
+        :escaped
+          <photo>
+    %tr
+      %td.indent2
+        :escaped
+          <url/>
+      %td URL
+      %td
+        The url of the agents profile photo. 
+        %br
+        %em Acceptable formats: JPG, PNG, GIF
+    %tr
+      %td.indent2
+        :escaped
+          <updated/>
+      %td Datetime
+      %td The last photos last updated time.
     %tr
       %td
         :escaped
           <location>
-      %td &nbsp;
-      %td &nbsp;
     %tr
       %td.indent
         :escaped
@@ -80,74 +93,21 @@
         %br
         %em Min -180.0, Max 180.0
     %tr
+      %td.indent
+        :escaped
+          <direction/>
+      %td String
+      %td The street directions to the properties location.
+    %tr
+      %td.indent
+        :escaped
+          <showAddress>
+      %td Boolean
+      %td Display the full address. If false then only the suburb name will be shown.
+    %tr
       %td
         :escaped
           <details>
-      %td &nbsp;
-      %td &nbsp;
-
-    %tr
-      %td.indent
-        :escaped
-          <website/>
-      %td String
-      %td The URL of the listing on your website.
-
-    %tr
-      %td.indent
-        :escaped
-          <price/>
-      %td Decimal
-      %td
-        %strong Residential Sales: 
-        The total price of the property in the specified currency.
-        %br
-        %strong Residential Rentals: 
-        The rental price of the property in the specified currency and period.
-        %br
-        %br
-        %em
-          %strong period: 
-          weekly, fortnightly, monthly
-          %br
-          %strong currency: 
-          Currency value should conform to the
-          #{link_to "ISO4217", "http://en.wikipedia.org/wiki/ISO_4217", :target => "_blank"} standard.
-    %tr
-      %td.indent
-        :escaped
-          <priceLabel/>
-      %td String
-      %td 
-        The price label is prepended to the price.
-        %br
-        %em priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable
-
-    %tr
-      %td.indent
-        :escaped
-          <priceDisplayMin/>
-      %td Decimal
-      %td The minimum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMax".
-    %tr
-      %td.indent
-        :escaped
-          <priceDisplayMax/>
-      %td Decimal
-      %td The maximum price for this property. Used to display ranged prices and used in conjunction with "priceDisplayMin".
-    
-    %tr
-      %td.indent
-        :escaped
-          <soldPrice/>
-      %td Decimal
-      %td If the status of the property is marked as sold, this tag will be used to record a sold price. This price is not displayed anywhere publicly.
-    %tr
-      %td.indent
-        :escaped
-          <soldDate/>
-      %td Date
-      %td The date on which the sale occurred.
     %tr
       %td.indent
         :escaped
@@ -156,7 +116,7 @@
       %td 
         The number of bedrooms this property has.
         %br
-        %em Studio, 0, 1, 2, 3, 4, 5+
+        %em Studio, 0, 1, 2, 3, 4, 5...
     %tr
       %td.indent
         :escaped
@@ -165,7 +125,7 @@
       %td 
         The number of bathrooms this property has.
         %%br
-        %em 0, 1, 2, 3, 4, 5+
+        %em 0, 1, 2, 3, 4, 5...
     %tr
       %td.indent
         :escaped
@@ -173,34 +133,130 @@
       %td String
       %td 
         The number of parking spaces this property has.
-        %em street, carport, 0, 1, 2, 3, 4, 5+
+        %em street, carport, 0, 1, 2, 3, 4, 5...
     %tr
       %td.indent
         :escaped
           <dateAvailable/>
       %td Date
       %td The date the property is available. For new developments this is the date the property is "ready for possession".
+    %tr
+      %td.indent
+        :escaped
+          <price>
+
+          
+    %tr
+      %td.indent2
+        :escaped
+          <amount/>
+      %td Decimal
+      %td The total price of the property in the specified currency. For rentals this is the amount payable each period.
+    %tr
+      %td.indent2
+        :escaped
+          <currency/>
+      %td Decimal
+      %td 
+        Currency value should conform to the
+        #{link_to "ISO4217", "http://en.wikipedia.org/wiki/ISO_4217", :target => "_blank"} standard.
+    %tr
+      %td.indent2
+        :escaped
+          <label/>
+      %td String
+      %td 
+        The price label is prepended to the price.
+        %br
+        %em priced_at, priced_from, price_on_request, priced_between, offers_over, reduced_to, negotiable
+
+    %tr
+      %td.indent2
+        :escaped
+          <minAmount/>
+      %td Decimal
+      %td The minimum price for this property. Used to display ranged prices and used in conjunction with "maxAmount".
+    %tr
+      %td.indent2
+        :escaped
+          <maxAmount/>
+      %td Decimal
+      %td The maximum price for this property. Used to display ranged prices and used in conjunction with "minAmount".
+    
+    %tr
+      %td.indent
+        :escaped
+          <soldPrice/>
+    %tr
+      %td.indent2
+        :escaped
+          <amount/>
+      %td Decimal
+      %td The amount this property was sold for.
+    %tr
+      %td.indent2
+        :escaped
+          <saleDate/>
+      %td Date
+      %td The date the sale occurred.
 
     %tr
       %td.indent
+        :escaped
+          <rentalTerms>
+      %td &nbsp;
+      %td &nbsp;
+
+    %tr
+      %td.indent2
+        :escaped
+          <deposit/>
+    %tr
+      %td.indent3
+        :escaped
+          <amount/>
+      %td Decimal
+      %td The rental deposit for the property.
+    %tr
+      %td.indent3
+        :escaped
+          <currency/>
+      %td String
+      %td The currency of the rental deposit.
+    %tr
+      %td.indent2
+        :escaped
+          <leaseType/>
+      %td String
+      %td
+        The lease period type
+        %br
+        %em daily, weekly, fortnightly, monthly, yearly
+
+    %tr
+      %td.indent2
+        :escaped
+          <leaseDuration/>
+      %td Decimal
+      %td
+        The minimum lease duration
+        %br
+        The period attribute defines the values period.
+        %em days, weeks, months, years
+
+    %tr
+      %td.indent
+        :escaped
+          <building>
+
+    %tr
+      %td.indent2
         :escaped
           <newlyBuilt/>
       %td Boolean
       %td Whether the property is new project or has been built recently.
     %tr
-      %td.indent
-        :escaped
-          <projectName/>
-      %td String
-      %td The name of the Project
-    %tr
-      %td.indent
-        :escaped
-          <builder/>
-      %td String  
-      %td The name of the builder if the property is newly built.
-    %tr
-      %td.indent
+      %td.indent2
         :escaped
           <yearBuilt/>
       %td Integer
@@ -209,41 +265,35 @@
         %br
         %em Format: YYYY
     %tr
-      %td.indent
+      %td.indent2
         :escaped
           <floorNumber/>
       %td Integer
       %td The floor number of the property if within a multi-story building.
-  
+
     %tr
-      %td.indent
+      %td.indent2
         :escaped
-          <landArea/>
+          <architectureStyle/>
+      %td Integer
+      %td The architectural style of the property.
+      
+    %tr
+      %td.indent2
+        :escaped
+          <orientation/>
+      %td Integer
+      %td 
+        The orientation of the property.
+        %br
+        %em Acceptable Values: north, north-east, north-west, south, south-east, south-west, east, west
+    %tr
+      %td.indent2
+        :escaped
+          <area/>
       %td Integer
       %td
-        The total land area of the property.
-        %br
-        The unit attribute allows the following values:
-        %br
-        %em feet, meters, acres, hectares
-    %tr
-      %td.indent
-        :escaped
-          <coveredArea/>
-      %td Integer
-      %td
-        The total covered area of the property.
-        %br
-        The unit attribute allows the following values:
-        %br
-        %em feet, meters
-    %tr
-      %td.indent
-        :escaped
-          <carpetedArea/>
-      %td Integer
-      %td
-        The total carpeted area of the property.
+        The total covered area of the building.
         %br
         The unit attribute allows the following values:
         %br
@@ -252,48 +302,66 @@
     %tr
       %td.indent
         :escaped
-          <builtupArea/>
+          <land>
+
+    %tr
+      %td.indent2
+        :escaped
+          <area/>
       %td Integer
       %td
-        The total builtup area of the property.
+        The total land area of the property.
         %br
         The unit attribute allows the following values:
         %br
-        %em feet, meters
-      
+        %em feet, meters, yards, acres, hectares
+        
     %tr
+      %td.indent2
+        :escaped
+          <frontage/>
+      %td Integer
       %td
-        :escaped
-          <rentalTerms>
-      %td &nbsp;
-      %td &nbsp;
-  
-    %tr
-      %td.indent
-        :escaped
-          <deposit/>
-      %td Decimal
-      %td The rental deposit for the property
-  
-    %tr
-      %td.indent
-        :escaped
-          <minimumDuration/>
-      %td Decimal
-      %td
-        The minimum rental duration
+        The frontage of the property.
         %br
-        The period attribute defines the values period.
-        %em weeks, months, years
+        The unit attribute allows the following values:
+        %br
+        %em feet, meters, yards, acres, hectares
+
+    %tr
+      %td.indent
+        :escaped
+          <project>
+
+    %tr
+      %td.indent2
+        :escaped
+          <projectName/>
+      %td String
+      %td The name of the Project
+    %tr
+      %td.indent2
+        :escaped
+          <builder/>
+      %td String  
+      %td The name of the builder if the property is newly built.
+
+    %tr
+      %td.indent2
+        :escaped
+          <completionDate/>
+      %td String  
+      %td The completion date of the project.
+
   
     %tr
-      %td
+      %td.indent
         :escaped
           <amenities>
       %td Boolean
       %td All amenities are boolean values.
     %tr
-      %td.indent
+      %td.indent2
         :escaped
           <other/>
       %td String
@@ -345,3 +413,10 @@
           <description/>
       %td String
       %td The description of the attachment. This helps optimize search engine keywords.
+      
+    %tr
+      %td.indent2
+        :escaped
+          <updated/>
+      %td String
+      %td The last updated time of this attachment.

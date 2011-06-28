@@ -183,14 +183,18 @@ table {
     table td.indent2, table th.indent2 {
       padding-left: 60px;
       padding-right: 0px; }
-  /* line 102, ../../views/stylesheets/site.css.sass */
+    /* line 103, ../../views/stylesheets/site.css.sass */
+    table td.indent3, table th.indent3 {
+      padding-left: 80px;
+      padding-right: 0px; }
+  /* line 106, ../../views/stylesheets/site.css.sass */
   table tr {
     border: 1px solid #e8e8e8; }
-  /* line 104, ../../views/stylesheets/site.css.sass */
+  /* line 108, ../../views/stylesheets/site.css.sass */
   table th {
     background: #f5f5f5; }
 
-/* line 107, ../../views/stylesheets/site.css.sass */
+/* line 111, ../../views/stylesheets/site.css.sass */
 #sidebar {
   background: #f9f9f9;
   position: fixed;
@@ -202,31 +206,31 @@ table {
   overflow-y: auto;
   padding: 15px 0 30px 30px;
   border-right: 1px solid #e8e8e8; }
-  /* line 119, ../../views/stylesheets/site.css.sass */
+  /* line 123, ../../views/stylesheets/site.css.sass */
   #sidebar a {
     display: block;
     margin-top: 20px;
     color: black;
     font-weight: bold;
     text-decoration: none; }
-    /* line 125, ../../views/stylesheets/site.css.sass */
+    /* line 129, ../../views/stylesheets/site.css.sass */
     #sidebar a span.version {
       font-size: 0.75em; }
-  /* line 128, ../../views/stylesheets/site.css.sass */
+  /* line 132, ../../views/stylesheets/site.css.sass */
   #sidebar ul {
     margin: 5px 0 0;
     font-size: 12px; }
-    /* line 131, ../../views/stylesheets/site.css.sass */
+    /* line 135, ../../views/stylesheets/site.css.sass */
     #sidebar ul li {
       list-style: none; }
-      /* line 133, ../../views/stylesheets/site.css.sass */
+      /* line 137, ../../views/stylesheets/site.css.sass */
       #sidebar ul li a {
         font-weight: normal; }
-  /* line 135, ../../views/stylesheets/site.css.sass */
+  /* line 139, ../../views/stylesheets/site.css.sass */
   #sidebar .logo {
     margin-top: 35px; }
 
-/* line 137, ../../views/stylesheets/site.css.sass */
+/* line 141, ../../views/stylesheets/site.css.sass */
 #main {
   line-height: 1.5;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
@@ -236,6 +240,6 @@ table {
   margin: 40px 0 50px 260px;
   width: 650px; }
 
-/* line 144, ../../views/stylesheets/site.css.sass */
+/* line 148, ../../views/stylesheets/site.css.sass */
 #illegal-characters td, #illegal-characters th {
   text-align: center; }

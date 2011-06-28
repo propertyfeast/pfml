@@ -9,113 +9,137 @@
       #!xml
       <?xml version="1.0" encoding="UTF-8"?>
 
-      <properties updatedAt="YYYY-MM-DD hh:mm:ss">
-    
-      	<property>
-      		<propertyId/>
-      		<officeId/>
-      		<mlsId/>
-      		<status>(active|rented|sold|under_contract|withdrawn)</status>
-      		<updated/>
-      		<listingType>(residential_rental|residential_sale)</listingType>
-      		<!-- repeatable tag -->
-      		<agent>
-      			<name/>
-      			<phone type="(office|mobile|home)" allowSMS="(yes|no)"/>
-      			<email/>
-      			<photo updatedAt="YYYY-MM-DD hh:mm:ss">
-      				<url/>
-      				<caption/>
-      			</photo>
-      		</agent>
-      		<location display="(yes|no)">
-      			<buildingName/>
-      			<streetNumber/>
-      			<street/>
-      			<locality/>
-      			<city/>
-      			<region/>
-      			<country/>
-      			<postcode/>
-      			<longitude/>
-      			<latitude/>
-      		</location>
-      		<details>
-      			<headline/>
-      			<description><![CDATA[ ]]></description>
-      			<propertyType><!-- repeatable tag -->
-      			  (apartment|house|penthouse|bungalow|villa|row_house|farm_house|duplex)
-      			</propertyType>
-      			<website/>
-      			<price period="(weekly|fortnightly|monthly)" currency="INR"/>
-      			<priceLabel>(priced_at|priced_from|price_on_request)</priceLabel>
-      			<priceDisplayMin/>
-      			<priceDisplayMax/>
-      			<soldPrice/>
-      			<soldDate/>
-      			<bedrooms/><!-- repeatable tag -->
-      			<bathrooms/><!-- repeatable tag -->
-      			<parking/><!-- repeatable tag -->
-      			<dateAvailable/>
-      			<newlyBuilt>(yes|no)</newlyBuilt>
-      			<projectName/>
-      			<builder/>
-      			<yearBuilt/>
-      			<floorNumber/>
-      			<landArea unit="(feet|meters|acres|hectares)"/>
-      			<coveredArea unit="(feet|meters)"/>
-      			<carpetedArea unit="(feet|meters)"/>
-      			<builtupArea unit="(feet|meters)"/>
-      		</details>
-      		<rentalTerms>
-      			<deposit currency="INR"/>
-      			<minimumDuration period="(weeks|months|years)"/>
-      			<sublettingAllowed>(yes|no)</sublettingAllowed>
-      		</rentalTerms>
-      		<amenities>
-      			<study>(yes|no)</study>
-      			<vaastu>(yes|no)</vaastu>
-      			<airConditioning>(yes|no)</airConditioning>
-      			<servantQuarters>(yes|no)</servantQuarters>
-      			<elevator>(yes|no)</elevator>
-      			<heating>(yes|no)</heating>
-      			<hotWater>(yes|no)</hotWater>
-      			<dishwasher>(yes|no)</dishwasher>
-      			<dryer>(yes|no)</dryer>
-      			<powerBackup>(yes|no)</powerBackup>
-      			<swimmingPool>(yes|no)</swimmingPool>
-      			<gymnasium>(yes|no)</gymnasium>
-      			<security>(yes|no)</security>
-      			<handicapAccess>(yes|no)</handicapAccess>
-      			<tennisCourt>(yes|no)</tennisCourt>
-      			<clubHouse>(yes|no)</clubHouse>
-      			<furnished>(yes|no)</furnished>
-      			<petsAllowed>(yes|no)</petsAllowed>
-      			<smokersAllowed>(yes|no)</smokersAllowed>
-      			<broadband>(yes|no)</broadband>
-      			<cableTV>(yes|no)</cableTV>
-      			<onsiteManager>(yes|no)</onsiteManager>
-      			<other/>
-      		</amenities>
-      		<!-- repeatable tag group-->
-      		<attachments>
-      			<photo updatedAt="YYYY-MM-DD hh:mm:ss">
-      				<url/>
-      				<caption/>
-      			</photo>
-      			<floorplan updatedAt="YYYY-MM-DD hh:mm:ss">
-      				<url/>
-      				<caption/>
-      			</floorplan>
-      			<video updatedAt="YYYY-MM-DD hh:mm:ss">
-      				<url/>
-      				<caption/>
-      			</video>
-      			<document updatedAt="YYYY-MM-DD hh:mm:ss">
-      				<url/>
-      				<caption/>
-      			</document>
-      		</attachments>
-      	</property>
+      <listings>
 
-      </properties>
+          <listing>
+              <listingId/>
+              <listingType>(residential_rental|residential_sale)</listingType>
+              <companyId/>
+              <status>(active|rented|sold|under_contract|withdrawn)</status>
+              <listingUrl/>
+              <updated/>
+              <agent><!-- repeatable tag -->
+                  <name/>
+                  <phone type="(office|mobile|home)"/><!-- repeatable tag -->
+                  <email/>
+                  <photo>
+                      <url/>
+                      <updated/>
+                  </photo>
+              </agent>
+              <location>
+                  <buildingName/>
+                  <streetNumber/>
+                  <street/>
+                  <locality/>
+                  <city/>
+                  <region/>
+                  <country/>
+                  <postcode/>
+                  <longitude/>
+                  <latitude/>
+                  <directions/>
+                  <showAddress/>
+              </location>
+              <details>
+                  <headline/>
+                  <description/>
+                  <propertyType><!-- repeatable tag -->
+                    (apartment|house|penthouse|bungalow|villa|row_house|farm_house|duplex)
+                  </propertyType>
+                  <bedrooms/><!-- repeatable tag -->
+                  <bathrooms/><!-- repeatable tag -->
+                  <parking/><!-- repeatable tag -->
+                  <dateAvailable/>
+                  <price>
+                      <amount/>
+                      <currency/>
+                      <label>(priced_at|priced_from|price_on_request)</label>
+                      <minAmount/>
+                      <maxAmount/>
+                  </price>
+                  <soldPrice>
+                      <amount/>
+                      <currency/>
+                      <saleDate/>
+                  </soldPrice>
+                  <rentalTerms>
+                      <deposit>
+                          <amount/>
+                          <currency/>
+                      </deposit>
+                      <leaseType>(weekly|fortnightly|monthly)</leaseType>
+                      <leaseDuration period="(days|weeks|months|years)"/>
+                  </rentalTerms>
+                  <building>
+                      <newlyBuilt/>
+                      <yearBuilt/>
+                      <floorNumber/>
+                      <architectureStyle/>
+                      <orientation/>
+                      <area unit="(feet|meters|yards)"/>
+                  </building>
+                  <land>
+                      <area unit="(feet|meters|yards|acres|hectares)"/>
+                      <frontage unit="(feet|meters|yards|acres|hectares)"/>
+                  </land>
+                  <project>
+                      <name/>
+                      <builder/>
+                      <completionDate/>
+                  </project>
+                  <amenities>
+                      <study>(yes|no)</study>
+                      <vaastu>(yes|no)</vaastu>
+                      <airConditioning>(yes|no)</airConditioning>
+                      <servantQuarters>(yes|no)</servantQuarters>
+                      <elevator>(yes|no)</elevator>
+                      <heating>(yes|no)</heating>
+                      <hotWater>(yes|no)</hotWater>
+                      <dishwasher>(yes|no)</dishwasher>
+                      <dryer>(yes|no)</dryer>
+                      <powerBackup>(yes|no)</powerBackup>
+                      <swimmingPool>(yes|no)</swimmingPool>
+                      <gymnasium>(yes|no)</gymnasium>
+                      <security>(yes|no)</security>
+                      <handicapAccess>(yes|no)</handicapAccess>
+                      <tennisCourt>(yes|no)</tennisCourt>
+                      <clubHouse>(yes|no)</clubHouse>
+                      <furnished>(yes|no)</furnished>
+                      <petsAllowed>(yes|no)</petsAllowed>
+                      <smokersAllowed>(yes|no)</smokersAllowed>
+                      <broadband>(yes|no)</broadband>
+                      <cableTV>(yes|no)</cableTV>
+                      <onsiteManager>(yes|no)</onsiteManager>
+                      <otherAmenities/>
+                  </amenities>
+              </details>
+              <attachments>
+                  <photo><!-- repeatable tag -->
+                      <url/>
+                      <caption/>
+                      <description/>
+                      <updated/>
+                  </photo>
+                  <floorplan><!-- repeatable tag -->
+                      <url/>
+                      <caption/>
+                      <description/>
+                      <updated/>
+                  </floorplan>
+                  <video><!-- repeatable tag -->
+                      <url/>
+                      <caption/>
+                      <description/>
+                      <updated/>
+                  </video>
+                  <document><!-- repeatable tag -->
+                      <url/>
+                      <caption/>
+                      <description/>
+                      <updated/>
+                  </document>
+              </attachments>
+          </listing>
+
+      </listings>
